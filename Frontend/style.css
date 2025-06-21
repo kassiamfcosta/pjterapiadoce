@@ -87,12 +87,13 @@ main {
     flex: 1;
     padding: 20px;
     margin-top: 60px;
+    background-size: 60rem;
 }
 
 h1, h2 {
     font-family: 'Berkshire Swash', cursive;
     text-align: center;
-    color: #854f35; /* marrom escuro */
+    color: #854f35;
 }
 
 .doce-area {
