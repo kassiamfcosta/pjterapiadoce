@@ -11,7 +11,7 @@ body {
     font-size: 15px;
     display: flex;
     margin: 0;
-    min-height: 100vh;
+    min-height: 10vh;
     color: #854f35; /* marrom escuro */
 }
 
@@ -24,8 +24,8 @@ header {
     left: 0;
     top: 0;
     right: 0;
-    height: 60px;
-    background-color: #b37d57; /* marrom */
+    height: 100px;
+    background-color: #d19d77; /* marrom */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,6 +37,46 @@ header h1 {
     color: #ffffff; /* branco */
     font-family: 'Berkshire Swash', cursive;
     font-size: 1.8rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+#img-logo {
+    width: 100%;
+}
+
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+.floating-buttons button,
+.floating-buttons a {
+  padding: 10px 10px;
+  background-color: #f69c9d; /* rosinha */
+  color: #fff;
+  border: none;
+  border-radius: 1000px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.floating-buttons button:hover,
+.floating-buttons a:hover {
+  background-color: #b37d57; /* marrom charmoso */
 }
 
 .menu-openner {
@@ -88,6 +128,40 @@ main {
     padding: 20px;
     margin-top: 60px;
     background-size: 60rem;
+}
+
+/* ===================== */
+/* CATEGORIAS DE PRODUTO */
+/* ===================== */
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.category-btn {
+    background-color: #f69c9d; /* rosa médio */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.category-btn:hover {
+    background-color: #ffb6b8; /* rosa claro */
+}
+
+.category-btn.active {
+    background-color: #b37d57; /* marrom */
+    color: #ffffff;
 }
 
 h1, h2 {

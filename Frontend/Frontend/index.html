@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/favicon.png" />
+    <link rel="icon" href="imagens/logo-terapia-doce.webp" />
     <title>Terapia Doce - Confeitaria Artesanal</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -35,21 +35,30 @@
 
     <header>
         <div class="header-content">
-            <img id="img-logo" src="imagens/logo-terapia-doce.png" alt="Logo Terapia Doce">
+            <img id="img-logo" src="imagens/logo-terapia-doce.webp" alt="Logo Terapia Doce">
             <h1>Terapia Doce</h1>
         </div>
         <div class="menu-openner"><span>0</span>🛒</div>
     </header>
 
+    <div class="floating-buttons">
+        <button id="topBtn">⬆ Topo</button>
+        <a id="whatsBtn" href="https://wa.me/5561920015630?text=Olá, estava no site e gostaria de mais informações sobre o produto! Poderia me ajudar?" target="_blank">
+            <img src="imagens/whatsapp.webp" alt="icone whatsapp">
+        </a>
+    </div>
+
     <main>
         <h2>Nossas Delícias</h2>
-        <div class="categories">
-            <button class="category-btn active" data-category="todos">Todos</button>
-            <button class="category-btn" data-category="bolos">Bolos</button>
-            <button class="category-btn" data-category="cupcakes">Cupcakes</button>
-            <button class="category-btn" data-category="docinhos">Docinhos</button>
-            <button class="category-btn" data-category="tortas">Tortas</button>
-        </div>
+
+            <div class="categories">
+                <button class="category-btn active" data-category="todos">Todos</button>
+                <button class="category-btn" data-category="brigadeiros">Brigadeiros</button>
+                <button class="category-btn" data-category="coxinhas">Coxinhas de Morango</button>
+                <button class="category-btn" data-category="tortas">Tortas no Pote</button>
+                <button class="category-btn" data-category="kits">Kits Festa</button>
+            </div>
+
         <div class="doce-area"></div>
     </main>
 
@@ -88,9 +97,8 @@
                 <div class="doceInfo--sizearea">
                     <div class="doceInfo--sector">TAMANHO</div>
                     <div class="doceInfo--sizes">
-                        <div data-key="0" class="doceInfo--size">10g <span>--</span></div>
-                        <div data-key="1" class="doceInfo--size selected">18g <span>--</span></div>
                     </div>
+
                 </div>
                 <div class="doceInfo--pricearea">
                     <div class="doceInfo--sector">Preço</div>
@@ -106,9 +114,8 @@
                 <div class="doceInfo--addButton">Adicionar ao carrinho</div>
                 <div class="doceInfo--cancelButton">Cancelar</div>
             </div>
-        </div>
+        </div> 
     </div>
-    
     <script src="doce.js"></script>
     <script src="js/script.js"></script>
 
