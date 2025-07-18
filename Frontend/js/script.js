@@ -131,7 +131,8 @@ document.querySelectorAll('.doceInfo--size').forEach((size) => {
 
 // Adicionar ao carrinho
 document.querySelector('.doceInfo--addButton').addEventListener('click', () => {
-    const selectedSize = document.querySelector('.doceInfo--size.selected').getAttribute('data-size');
+    const selectedSizeBtn = document.querySelector('.doceInfo--sizes.selected');
+    const selectedSize = selectedSizeBtn ? selectedSizeBtn.getAttribute('data-size') : 0;
     const doce = doceJson[modalKey];
     const identifier = `${doce.id}-${selectedSize}`;
 
@@ -145,8 +146,7 @@ document.querySelector('.doceInfo--addButton').addEventListener('click', () => {
             size: selectedSize,
             qt: modalQt,
             name: doce.name,
-            img: doce.img,
-            price: doce.price[selectedSize]
+            price: doce.prices ? doce.prices[selectedSize] : doce.price
         });
     }
 
@@ -188,16 +188,6 @@ function updateCart() {
 
             subtotal += cart[i].price * cart[i].qt;
         }
-
-        let total = subtotal - desconto;
-
-        document.querySelector('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
-        document.querySelector('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
-        document.querySelector('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
-        document.querySelector('.menu-openner span').innerHTML = cart.length;
-    } else {
-        document.querySelector('aside').classList.remove('show');
-        documentSelector('.menu-openner span').innerHTML = '0';
     }
 }
 
@@ -229,7 +219,8 @@ document.querySelectorAll('.category-btn').forEach(btn => {
 
         const categoria = btn.dataset.category;
         document.querySelectorAll('.doce-item').forEach((item, index) => {
-            if (categoria === 'todos' || doceJson[index].category === categoria) {
+            const doce = doceJson[index];
+            if (categoria === 'todos' || (doce && doce.category === categoria)) {
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
