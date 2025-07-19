@@ -189,7 +189,7 @@ function updateCart() {
             subtotal += cart[i].price * cart[i].qt;
         }
     }
-}
+};
 
 // Abrir/fechar carrinho
 document.querySelector('.menu-openner').addEventListener('click', () => {
