@@ -1,4 +1,4 @@
-let doceJson = [
+const doceData = [
     {
         id: 1,
         name: 'Brigadeiro Tradicional 50% Cacau',
@@ -121,8 +121,7 @@ let doceJson = [
         img: 'imagens/trad-ninho.png',
         price:  [220.00],
         sizes: ['Kit 100 unidades'],
-        description: 'Kit festa com 50 unidades de brigadeiro Tradicional e 50 unidades de brigadeiro Ninho.',
-        category: 'kits'
+        description: 'Kit festa com brigadeiro e ninho'
     },
     {
         id: 9,
@@ -157,7 +156,7 @@ let doceJson = [
         name: 'Coxinha de Morango Tradicional',
         img: 'imagens/coxinha-trad.png', // Ajustado para ser uma imagem genérica de coxinha, já que não há uma específica "tradicional" de morango na sua listagem de imagens, mas você menciona "Tradicional Chocolate 50% cacau" que é brigadeiro, e "coxinha-trad.png" que é uma imagem de coxinha. Assumi que esta é a imagem da coxinha de morango "tradicional".
         price: [8.00], // Preço da unidade, conforme Pricing Coxinha
-        sizes: ['1 unidade', 'Caixinha c/ 2 (2 sabores)', 'Caixinha c/ 4', 'Kit Festa 100un (2 sabores)'],
+        sizes: ['1 unidade' , 'Caixinha c/ 2 (2 sabores)' , 'Caixinha c/ 4' , 'Kit Festa 100un (2 sabores)' ],
         description: 'Coxinha de morango gourmet. Confira a disponibilidade!',
         category: 'coxinhas' // Nova categoria
     },
@@ -275,3 +274,4 @@ let doceJson = [
         }
     }
 ];
+const doceJson = doceData;
