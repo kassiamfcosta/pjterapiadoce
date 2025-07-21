@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imagens/logo-terapia-doce.webp" />
+    <title>Terapia Doce - Confeitaria Artesanal (Com API)</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Estilos adicionais para integração com API */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .error-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .api-status {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .api-status.online {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .api-status.offline {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .menu-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            opacity: 0.8;
+        }
+        
+        .menu-item.active {
+            background: #ff6b35;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Status da API -->
+    <div class="api-status" id="apiStatus">
+        <span>🔄 Conectando com API...</span>
+    </div>
+
+    <!-- modelos -->
+    <div class="models">
+        <!-- doce na lista -->
+        <div class="doce-item">
+            <a href="">
+                <div class="doce-item--img"><img src="" /></div>
+                <div class="doce-item--add">+</div>
+            </a>
+            <div class="doce-item--price">R$ --</div>
+            <div class="doce-item--name">--</div>
+            <div class="doce-item--desc">--</div>
+        </div>
+
+        <!-- doce no carrinho -->
+        <div class="cart--item">
+            <img src="" />
+            <div class="cart--item-nome">--</div>
+            <div class="cart--item--qtarea">
+                <button class="cart--item-qtmenos">-</button>
+                <div class="cart--item--qt">1</div>
+                <button class="cart--item-qtmais">+</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="imagens/logo-terapia-doce.webp" alt="Logo Terapia Doce" />
+            </div>
+            <div class="menu">
+                <div class="menu-item active" data-category="all">
+                    <div class="menu-item--img"><img src="imagens/doce.png" /></div>
+                    <div class="menu-item--text">Todos</div>
+                </div>
+                <div class="menu-item" data-category="brigadeiros">
+                    <div class="menu-item--img"><img src="imagens/brigadeiro.png" /></div>
+                    <div class="menu-item--text">Brigadeiros</div>
+                </div>
+                <div class="menu-item" data-category="tortas">
+                    <div class="menu-item--img"><img src="imagens/torta.png" /></div>
+                    <div class="menu-item--text">Tortas</div>
+                </div>
+                <div class="menu-item" data-category="especiais">
+                    <div class="menu-item--img"><img src="imagens/especial.png" /></div>
+                    <div class="menu-item--text">Especiais</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="doce-area">
+                <div class="loading">
+                    🍰 Carregando doces deliciosos...
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+        <div class="cart--area">
+            <div class="cart">
+                <div class="cart--details">
+                    <div class="cart--totalitem">
+                        <span>Itens</span>
+                        <span>0</span>
+                    </div>
+                    <div class="cart--totalvalue">
+                        <span>Total</span>
+                        <span>R$ 0,00</span>
+                    </div>
+                    <div class="cart--desc">Entrega para:</div>
+                    <div class="cart--buttons">
+                        <div class="cart--button cart--button-add" onclick="finishOrder()">Finalizar Pedido</div>
+                    </div>
+                </div>
+                <div class="cart--item-area">
+
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="doceWindowArea">
+        <div class="doceWindowBody">
+            <div class="doceInfo--cancelMobileButton" onclick="closeModal()">x</div>
+            <div class="doceBig">
+                <img src="" />
+            </div>
+            <div class="doceInfo">
+                <h1>--</h1>
+                <div class="doceInfo--desc">--</div>
+                <div class="doceInfo--sizearea">
+                    <div class="doceInfo--sector">Tamanho</div>
+                    <div class="doceInfo--sizes">
+                        <div data-key="0" class="doceInfo--size selected">
+                            <span>--</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="doceInfo--pricearea">
+                    <div class="doceInfo--sector">Preço</div>
+                    <div class="doceInfo--price">
+                        <div class="doceInfo--actualPrice">R$ --</div>
+                        <div class="doceInfo--qtarea">
+                            <button class="doceInfo--qtmenos" onclick="modalQt--; updateModalQt()">-</button>
+                            <div class="doceInfo--qt">1</div>
+                            <button class="doceInfo--qtmais" onclick="modalQt++; updateModalQt()">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="doceInfo--addButton" onclick="addToCart()">Adicionar ao carrinho</div>
+                <div class="doceInfo--cancelButton" onclick="closeModal()">Cancelar</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para atualizar quantidade no modal
+        function updateModalQt() {
+            if (modalQt < 1) modalQt = 1;
+            document.querySelector('.doceInfo--qt').textContent = modalQt;
+            
+            // Atualizar preço
+            if (window.DoceApp && doceData[modalKey]) {
+                const price = doceData[modalKey].price[0] * modalQt;
+                document.querySelector('.doceInfo--actualPrice').textContent = `R$ ${price.toFixed(2)}`;
+            }
+        }
+
+        // Função para atualizar status da API
+        function updateApiStatus(online) {
+            const statusDiv = document.getElementById('apiStatus');
+            if (online) {
+                statusDiv.className = 'api-status online';
+                statusDiv.innerHTML = '<span>✅ API Online</span>';
+            } else {
+                statusDiv.className = 'api-status offline';
+                statusDiv.innerHTML = '<span>⚠️ API Offline - Usando dados locais</span>';
+            }
+        }
+
+        // Configurar event listeners quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            // Event listeners para menu
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remover active de todos
+                    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                    // Adicionar active no clicado
+                    item.classList.add('active');
+                });
+            });
+
+            // Verificar status da API periodicamente
+            setInterval(() => {
+                fetch('http://localhost:8000/api/doces/')
+                    .then(() => updateApiStatus(true))
+                    .catch(() => updateApiStatus(false));
+            }, 30000); // Verificar a cada 30 segundos
+        });
+    </script>
+
+    <!-- Script da API integrada -->
+    <script src="doce-api.js"></script>
+</body>
+</html>
